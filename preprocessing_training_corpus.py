@@ -1,6 +1,7 @@
 import pandas as pd
 import random
 import config
+from utilities import format_string
 
 
 labels = [
@@ -33,13 +34,15 @@ def write_one_train_corpus(label):
     train_file, dev_file = get_train_dev_corpus_file_name(label)
     sentences = original_content['comment_text'].tolist()
     labels = original_content[label].tolist()
-    with open(train_file, 'w') as f:
-        for index in train_indices:
-            f.write('__label__{} {}\n'.format(labels[index], sentences[index]))
 
-    with open(dev_file, 'w') as f:
-        for index in dev_indices:
-            f.write('__label__{} {}\n'.format(labels[index], sentences[index]))
+    def write_to_file(file, indices):
+        with open(file, 'w') as f:
+            for ii in indices:
+                sentence = format_string(sentences[ii])
+                f.write('__label__{} {}\n'.format(labels[ii], sentence))
+
+    write_to_file(train_file, train_indices)
+    write_to_file(dev_file, dev_indices)
 
 
 if __name__ == '__main__':

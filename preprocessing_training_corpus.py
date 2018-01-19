@@ -8,7 +8,7 @@ labels = [
     'obscene',
     'threat',
     'insult',
-    'identity_hat',
+    'identity_hate',
 ]
 
 

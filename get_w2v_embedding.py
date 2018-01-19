@@ -24,7 +24,6 @@ def train_embedding(model, dim, lr, windows, epoch, thread):
 
 if __name__ == '__main__':
     cpu_number = 60
-    Pool.starmap()
     pool = Pool(processes=cpu_number)
 
     P = Parameters

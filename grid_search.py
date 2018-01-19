@@ -6,7 +6,7 @@ from preprocessing_training_corpus import get_train_dev_corpus_file_name
 from preprocessing_training_corpus import labels
 
 
-def train(label, model, dim, lr, windows, epoch, f, thread):
+def train(label, model, dim, lr, windows, epoch, record, thread):
     w2v_model_name = '{}/w2v/w2v-{}-{}-{}-{}-{}'.format(config.root, model, dim, lr, windows, epoch)
     if model == 'skip':
         func = fasttext.skipgram
@@ -34,7 +34,8 @@ def train(label, model, dim, lr, windows, epoch, f, thread):
     result = classifier.test(dev_file)
     print(" PRECISION: {}, RECALL: {}".format(result.precision, result.recall))
 
-    f.write('{}-{}-{}-{}-{}-{}-precision-{}-recall-{}\n'.format(label, model, dim, lr, windows, epoch, result.precision, result.recall))
+    with open(record, 'a') as f:
+        f.write('{}-{}-{}-{}-{}-{}-precision-{}-recall-{}\n'.format(label, model, dim, lr, windows, epoch, result.precision, result.recall))
 
 
 if __name__ == '__main__':
@@ -46,6 +47,6 @@ if __name__ == '__main__':
     threads = 50
 
     for label in labels:
-        with open('{}_train_recoding.txt'.format(label), 'w') as f:
-            for m, d, l, w, e in product(models, dimensons, learning_rates, ws, epochs):
-                train(label=label, model=m, dim=d, lr=l, windows=w, epoch=e, f=f, thread=threads)
+        record = '{}_train_recoding.txt'.format(label)
+        for m, d, l, w, e in product(models, dimensons, learning_rates, ws, epochs):
+            train(label=label, model=m, dim=d, lr=l, windows=w, epoch=e, f=record, thread=threads)

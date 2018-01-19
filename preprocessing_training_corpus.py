@@ -28,8 +28,13 @@ def write_one_train_corpus(label):
     white_indices = np.nonzero(np.array(labeled_data) == 0)[0].tolist()
 
     expanding_ratio = (len(white_indices) - len(black_indices)) // len(black_indices)
-    black_indices = black_indices * expanding_ratio
+    black_indices = black_indices * (expanding_ratio + 1)
     print('expanding ratio is {}'.format(expanding_ratio))
+
+    length = min(len(white_indices), len(black_indices))
+
+    white_indices = white_indices[:length]
+    black_indices = black_indices[:length]
 
     print('white indices is {}'.format(len(white_indices)))
     print('black indices is {}'.format(len(black_indices)))

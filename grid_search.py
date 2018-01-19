@@ -41,10 +41,10 @@ def train(label, model, dim, lr, windows, epoch, record, thread):
 
 if __name__ == '__main__':
     models = ['cbow', 'skip']
-    dimensons = [30, 50, 80, 100, 150, 200, 300]
-    learning_rates = [1e-3, 1e-2, 0.05, 1e-1]
+    dimensons = [20, 50, 100, 200]
+    learning_rates = [1e-3, 1e-2]
     ws = [3, 5, 7]
-    epochs = [3, 5, 10]
+    epochs = [5, 10, 15]
     threads = 50
 
     for label in labels:

@@ -2,6 +2,7 @@ import pandas as pd
 import random
 import config
 from utilities import format_string
+import numpy as np
 
 
 labels = [
@@ -22,7 +23,18 @@ def get_train_dev_corpus_file_name(label):
 def write_one_train_corpus(label):
     original_content = pd.read_csv('data/train.csv')
 
-    indices = list(range(len(original_content)))
+    labeled_data = original_content[label].tolist()
+    black_indices = np.nonzero(np.array(labeled_data) == 1)[0].tolist()
+    white_indices = np.nonzero(np.array(labeled_data) == 0)[0].tolist()
+
+    expanding_ratio = (len(white_indices) - len(black_indices)) / len(black_indices)
+    black_indices = black_indices * expanding_ratio
+    print('expanding ratio is {}'.format(expanding_ratio))
+
+    print('white indices is {}'.format(len(white_indices)))
+    print('black indices is {}'.format(len(black_indices)))
+
+    indices = black_indices + expanding_ratio
 
     [random.shuffle(indices) for _ in range(10)]
 

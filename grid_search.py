@@ -15,12 +15,13 @@ def train(model, dim, lr, windows, epoch, f, thread):
          dim=dim, lr=lr, ws=windows, epoch=epoch, thread=thread)
 
     w2v_model_path = w2v_model_name + '.vec'
-    clf_path = './cust_data/toxic_clasifier-{}-{}-{}-{}-{}_model'.format(model, dim, lr, windows, epoch),
+    clf_path = './cust_data/toxic_clasifier-{}-{}-{}-{}-{}_model'.format(model, dim, lr, windows, epoch)
 
     classifier = fasttext.supervised(
         './cust_data/train_corpus.txt',
         clf_path,
-        dim=100, pretrained_vectors=w2v_model_path
+        dim=dim,
+        pretrained_vectors=w2v_model_path
     )
 
     print('WHEN DIM = {}, LR = {}, windows = {}, epoch = {}, model = {}'.format(dim, lr, windows, epoch, model))

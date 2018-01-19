@@ -34,7 +34,7 @@ def write_one_train_corpus(label):
     print('white indices is {}'.format(len(white_indices)))
     print('black indices is {}'.format(len(black_indices)))
 
-    indices = black_indices + expanding_ratio
+    indices = black_indices + white_indices
 
     [random.shuffle(indices) for _ in range(10)]
 

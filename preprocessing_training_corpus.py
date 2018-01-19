@@ -31,17 +31,18 @@ def write_one_train_corpus(label):
     train_file, dev_file = get_train_dev_corpus_file_name(label)
     sentences = original_content['comment_text'].tolist()
     labels = original_content[label].tolist()
-    with open(train_file) as f:
+    with open(train_file, 'w') as f:
         for index in train_indices:
             f.write('__label__{} {}\n'.format(labels[index], sentences[index]))
 
-    with open(dev_file) as f:
+    with open(dev_file, 'w') as f:
         for index in dev_indices:
             f.write('__label__{} {}\n'.format(labels[index], sentences[index]))
 
 
 if __name__ == '__main__':
     for l in labels:
+        print('label {}'.format(l))
         write_one_train_corpus(l)
 
 

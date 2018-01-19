@@ -49,4 +49,4 @@ if __name__ == '__main__':
     for label in labels:
         record = '{}_train_recoding.txt'.format(label)
         for m, d, l, w, e in product(models, dimensons, learning_rates, ws, epochs):
-            train(label=label, model=m, dim=d, lr=l, windows=w, epoch=e, f=record, thread=threads)
+            train(label=label, model=m, dim=d, lr=l, windows=w, epoch=e, record=record, thread=threads)

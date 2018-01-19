@@ -1,5 +1,6 @@
 import pandas as pd
 import random
+import config
 
 
 labels = [
@@ -13,7 +14,8 @@ labels = [
 
 
 def get_train_dev_corpus_file_name(label):
-    return './cust_data/train-corpus-{}.txt'.format(label), './cust_data/dev-corpus-{}.txt'.format(label)
+    return '{}/text/train-corpus-{}.txt'.format(config.root, label), \
+           '{}/text/dev-corpus-{}.txt'.format(config.root, label)
 
 
 def write_one_train_corpus(label):
@@ -44,8 +46,4 @@ if __name__ == '__main__':
     for l in labels:
         print('label {}'.format(l))
         write_one_train_corpus(l)
-
-
-
-
 

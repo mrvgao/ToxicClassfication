@@ -30,7 +30,7 @@ def train(label, model, dim, lr, windows, epoch, record, thread):
         pretrained_vectors=w2v_model_path
     )
 
-    print('WHEN DIM = {}, LR = {}, windows = {}, epoch = {}, model = {}'.format(dim, lr, windows, epoch, model))
+    print('WHEN LABEL = {} DIM = {}, LR = {}, windows = {}, epoch = {}, model = {}'.format(label, dim, lr, windows, epoch, model))
     result = classifier.test(dev_file)
     print(" PRECISION: {}, RECALL: {}".format(result.precision, result.recall))
 

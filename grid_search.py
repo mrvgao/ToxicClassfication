@@ -27,7 +27,8 @@ def train(label, model, dim, lr, windows, epoch, record, thread):
         train_file,
         clf_path,
         dim=dim,
-        pretrained_vectors=w2v_model_path
+        pretrained_vectors=w2v_model_path,
+        thread=threads
     )
 
     print('WHEN LABEL = {} DIM = {}, LR = {}, windows = {}, epoch = {}, model = {}'.format(label, dim, lr, windows, epoch, model))

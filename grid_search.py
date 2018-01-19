@@ -30,7 +30,7 @@ def train(label, model, dim, lr, windows, epoch, record, thread):
             clf_path,
             dim=dim,
             pretrained_vectors=w2v_model_path,
-            thread=threads
+            thread=thread
         )
     else:
         classifier = fasttext.load_model(clf_path + '.bin')
@@ -43,7 +43,7 @@ def train(label, model, dim, lr, windows, epoch, record, thread):
         f.write('{}-{}-{}-{}-{}-{}-precision-{}-recall-{}\n'.format(label, model, dim, lr, windows, epoch, result.precision, result.recall))
 
 
-if __name__ == '__main__':
+class Parameters:
     models = ['skip', 'cbow']
     dimensons = [30, 60, 100]
     learning_rates = [1e-3, 1e-2]
@@ -51,7 +51,10 @@ if __name__ == '__main__':
     epochs = [5, 10, 15]
     threads = 50
 
+
+if __name__ == '__main__':
+    P = Parameters
     for label in labels:
         record = '{}_train_recoding.txt'.format(label)
-        for m, d, l, w, e in product(models, dimensons, learning_rates, ws, epochs):
-            train(label=label, model=m, dim=d, lr=l, windows=w, epoch=e, record=record, thread=threads)
+        for m, d, l, w, e in product(P.models, P.dimensons, P.learning_rates, P.ws, P.epochs):
+            train(label=label, model=m, dim=d, lr=l, windows=w, epoch=e, record=record, thread=P.threads)

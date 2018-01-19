@@ -6,7 +6,7 @@ import config
 test_content = pd.read_csv('data/test.csv')
 original_content = pd.read_csv('data/train.csv')
 
-with open('{}/line_corpus.txt'.format(config.root), 'w') as f:
+with open(config.line_corpus, 'w') as f:
     for row in chain(*[df.iterrows() for df in [test_content, original_content]]):
         try:
             sentence = format_string(str(row[1].comment_text))

@@ -24,20 +24,22 @@ def train_and_predicate(label, model, dim, lr, windows, epoch):
     fasttext = FastText()
 
     if not os.path.exists(clf_path + '.bin'):
-        classifier = fasttext.supervised(
+        fasttext.supervised(
+        # classifier = fasttext.supervised(
             train_file,
             clf_path,
             dim=dim,
             pretrained_vectors=w2v_model_path,
         )
     else:
-        classifier = fasttext.load_model(clf_path + '.bin')
+        # classifier = fasttext.load_model(clf_path + '.bin')
+        fasttext.load_model(clf_path + '.bin')
 
     print('WHEN LABEL = {} DIM = {}, LR = {}, windows = {}, epoch = {}, model = {}'.format(label, dim, lr, windows, epoch, model))
-    result = classifier.test(dev_file)
+    result = fasttext.test(dev_file)
     print(" PRECISION: {}, RECALL: {}".format(result.precision, result.recall))
 
-    del classifier
+    del fasttext
 
     # with open(record, 'a') as f:
     return '{}-{}-{}-{}-{}-{}-precision-{}-recall-{}\n'.format(label, model, dim, lr, windows, epoch, result.precision, result.recall)

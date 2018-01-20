@@ -14,11 +14,11 @@ from evaluation import evaluation
 def predicate(label, model_path):
     train_file, dev_file = get_train_dev_corpus_file_name(label=label)
     classifier = fasttext.load_model(model_path)
-    print('WHEN LABEL = {} DIM = {}, LR = {}, windows = {}, epoch = {}, model = {}'.format(label, dim, lr, windows, epoch, model))
+    # print('WHEN LABEL = {} DIM = {}, LR = {}, windows = {}, epoch = {}, model = {}'.format(label, dim, lr, windows, epoch, model))
     result = classifier.test(dev_file)
     p, r, f1 = evaluation(classifier, dev_file)
     print('p, r, f1 by self is : P: {} R: {} f1: {}'.format(p, r, f1))
-    print(" PRECISION: {}, RECALL: {}".format(result.precision, result.recall))
+    print(" {}_PRECISION: {}, RECALL: {}".format(label, result.precision, result.recall))
     return '{}-{}-precision-{}-recall-{}-f1-{}\n'.format(label, model_path, p, r, f1)
 
 

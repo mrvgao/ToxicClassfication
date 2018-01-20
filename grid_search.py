@@ -33,7 +33,7 @@ def train_and_predicate(label, model, dim, lr, windows, epoch):
         )
     else:
         classifier = fasttext.load_model(clf_path + '.bin')
-        fasttext.load_model(clf_path + '.bin')
+        # fasttext.load_model(clf_path + '.bin')
 
     print('WHEN LABEL = {} DIM = {}, LR = {}, windows = {}, epoch = {}, model = {}'.format(label, dim, lr, windows, epoch, model))
     result = classifier.test(dev_file)

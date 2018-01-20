@@ -37,7 +37,7 @@ def train_and_predicate(label, model, dim, lr, windows, epoch):
 
     del classifier
 
-    return '{}-{}-{}-{}-{}-{}-precision-{}-recall-{}\n'.format(label, model, dim, lr, windows, epoch, result.precision, result.recall)
+    return '{}-{}-{}-{}-{}-{}-precision-{}-recall-{}-f1-{}\n'.format(label, model, dim, lr, windows, epoch, p, r, f1)
 
 
 def merge_result(already_notes, file):

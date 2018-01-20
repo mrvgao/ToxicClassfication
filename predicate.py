@@ -44,7 +44,7 @@ with open('test_result.csv', 'w') as f:
 
         new_row = [_id]
         for label in columns[1:]:
-            result = best_model_parameters[label].predict_proba([text], k=2)
+            result = best_model_parameters[label].predict_proba([str(text)], k=2)
             prob = result[0]
             p = get_label_prob(prob)
             new_row.append(p)

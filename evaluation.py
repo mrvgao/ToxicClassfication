@@ -1,9 +1,9 @@
 def precision(lables, predict):
-    return sum([1 for l, p in zip(lables, predict) if l == p]) / len(lables)
+    return sum([1 for l, p in zip(lables, predict) if l == p[0]]) / len(lables)
 
 
 def recall(lables, predicate, right_label):
-    right_num = sum([1 for l, p in zip(lables, predicate) if l == p and l == right_label])
+    right_num = sum([1 for l, p in zip(lables, predicate) if l == p[0] and l == right_label])
     samples_num = sum([1 for l in lables if l == right_label])
     return right_num / samples_num
 

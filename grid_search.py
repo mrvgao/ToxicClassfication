@@ -9,11 +9,10 @@ from get_w2v_embedding import get_embedding_name
 from multiprocessing import Pool
 from functools import reduce
 from importlib import reload
-import fasttext
 
 
 def train_and_predicate(label, model, dim, lr, windows, epoch):
-    reload(fasttext)
+    import fasttext
     w2v_model_name = get_embedding_name(model, dim, lr, windows, epoch)
     w2v_model_path = w2v_model_name + '.vec'
 

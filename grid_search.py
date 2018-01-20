@@ -8,9 +8,11 @@ from paramters import Parameters
 from get_w2v_embedding import get_embedding_name
 from multiprocessing import Pool
 from functools import reduce
+from importlib import reload
 
 
 def train_and_predicate(label, model, dim, lr, windows, epoch):
+    reload(fasttext)
     w2v_model_name = get_embedding_name(model, dim, lr, windows, epoch)
     w2v_model_path = w2v_model_name + '.vec'
 
@@ -32,7 +34,7 @@ def train_and_predicate(label, model, dim, lr, windows, epoch):
     result = classifier.test(dev_file)
     print(" PRECISION: {}, RECALL: {}".format(result.precision, result.recall))
 
-    classifier = None
+    del classifier
 
     # with open(record, 'a') as f:
     return '{}-{}-{}-{}-{}-{}-precision-{}-recall-{}\n'.format(label, model, dim, lr, windows, epoch, result.precision, result.recall)

@@ -38,7 +38,7 @@ def train_and_predicate(label, model, dim, lr, windows, epoch):
     # fasttext.test(dev_file)
     print(" PRECISION: {}, RECALL: {}".format(result.precision, result.recall))
 
-    del fasttext
+    # del fasttext
 
     # with open(record, 'a') as f:
     return '{}-{}-{}-{}-{}-{}-precision-{}-recall-{}\n'.format(label, model, dim, lr, windows, epoch, result.precision, result.recall)

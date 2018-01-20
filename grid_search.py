@@ -37,7 +37,7 @@ def train_and_predicate(label, model, dim, lr, windows, epoch):
 
 
 def merge_result(already_notes, file):
-    return already_notes.append(file)
+    return already_notes + [file]
 
 
 if __name__ == '__main__':

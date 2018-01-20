@@ -1,4 +1,5 @@
-import fasttext
+# import fasttext
+from pyfasttext import FastText
 from itertools import product
 import config
 import os
@@ -12,13 +13,15 @@ from importlib import reload
 
 
 def train_and_predicate(label, model, dim, lr, windows, epoch):
-    reload(fasttext)
+    # reload(fasttext)
     w2v_model_name = get_embedding_name(model, dim, lr, windows, epoch)
     w2v_model_path = w2v_model_name + '.vec'
 
     clf_path = '{}/clf/{}-{}-{}-{}-{}_model'.format(config.root, model, dim, lr, windows, epoch)
 
     train_file, dev_file = get_train_dev_corpus_file_name(label=label)
+
+    fasttext = FastText()
 
     if not os.path.exists(clf_path + '.bin'):
         classifier = fasttext.supervised(

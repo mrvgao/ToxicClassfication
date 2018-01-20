@@ -6,7 +6,7 @@ import numpy as np
 
 
 labels = [
-    'toxic',
+    # 'toxic',
     'severe_toxic',
     'obscene',
     'threat',

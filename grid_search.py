@@ -54,7 +54,7 @@ if __name__ == '__main__':
     results = []
     # results = pool.starmap(train_and_predicate, product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs))
     for args in product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs):
-        results.append(*args)
+        results.append(*train_and_predicate(args))
 
     result = reduce(merge_result, results, [])
 

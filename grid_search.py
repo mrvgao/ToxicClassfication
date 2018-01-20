@@ -24,8 +24,8 @@ def train_and_predicate(label, model, dim, lr, windows, epoch):
     # fasttext = FastText()
 
     if not os.path.exists(clf_path + '.bin'):
-        fasttext.supervised(
-        # classifier = fasttext.supervised(
+        # fasttext.supervised(
+        classifier = fasttext.supervised(
             train_file,
             clf_path,
             dim=dim,

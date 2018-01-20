@@ -11,6 +11,17 @@ import fasttext
 from evaluation import evaluation
 
 
+def predicate(label, model_path):
+    train_file, dev_file = get_train_dev_corpus_file_name(label=label)
+    classifier = fasttext.load_model(model_path)
+    print('WHEN LABEL = {} DIM = {}, LR = {}, windows = {}, epoch = {}, model = {}'.format(label, dim, lr, windows, epoch, model))
+    result = classifier.test(dev_file)
+    p, r, f1 = evaluation(classifier, dev_file)
+    print('p, r, f1 by self is : P: {} R: {} f1: {}'.format(p, r, f1))
+    print(" PRECISION: {}, RECALL: {}".format(result.precision, result.recall))
+    return '{}-{}-precision-{}-recall-{}-f1-{}\n'.format(label, model_path, p, r, f1)
+
+
 def train_and_predicate(label, model, dim, lr, windows, epoch):
     w2v_model_name = get_embedding_name(model, dim, lr, windows, epoch)
     w2v_model_path = w2v_model_name + '.vec'
@@ -37,8 +48,6 @@ def train_and_predicate(label, model, dim, lr, windows, epoch):
 
     del classifier
 
-    return '{}-{}-{}-{}-{}-{}-precision-{}-recall-{}-f1-{}\n'.format(label, model, dim, lr, windows, epoch, p, r, f1)
-
 
 def merge_result(already_notes, file):
     return already_notes + [file]
@@ -56,14 +65,19 @@ if __name__ == '__main__':
     # index = 0
     # start = 30 * index
     # step = 30 * (index + 1)
-    for ii, args in enumerate(product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)):
+    # for ii, args in enumerate(product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)):
     #     if ii < start: continue
     #     if ii >= step: break
-        try:
-            results.append(train_and_predicate(*args))
-        except MemoryError as e:
-            print(e)
-            continue
+    #     try:
+    #         results.append(train_and_predicate(*args))
+    #     except MemoryError as e:
+    #         print(e)
+    #         continue
+
+    pathes = [p.strip() for p in open('right_pathes.txt')]
+
+    for l, p in product(labels, pathes):
+        results.append(predicate(l, p))
 
     result = reduce(merge_result, results, [])
 

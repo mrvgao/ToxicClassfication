@@ -55,5 +55,5 @@ if __name__ == '__main__':
 
     result = reduce(merge_result, results, [])
 
-    with open(file, 'w') as f:
+    with open(file, 'a') as f:
         f.writelines(result)

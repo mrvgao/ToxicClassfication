@@ -19,7 +19,7 @@ def train_embedding(model, dim, lr, windows, epoch):
 
     w2v_model_name = get_embedding_name(model, dim, lr, windows, epoch)
     print('training embedding {}'.format(w2v_model_name))
-    func(config.line_corpus, w2v_model_name, dim=dim, lr=lr, ws=windows, epoch=epoch)
+    func(config.line_corpus, w2v_model_name, dim=dim, lr=lr, ws=windows, epoch=epoch, thread=60)
     print('embedding end: {}'.format(w2v_model_name))
 
 
@@ -29,7 +29,10 @@ if __name__ == '__main__':
 
     P = Parameters
 
-    pool.starmap(train_embedding, product(P.models, P.dimensons, P.learning_rates, P.ws, P.epochs))
+    for arg in product(P.models, P.dimensons, P.learning_rates, P.ws, P.epochs):
+        train_embedding(*arg)
+
+    # pool.starmap(train_embedding, product(P.models, P.dimensons, P.learning_rates, P.ws, P.epochs))
 
 
 

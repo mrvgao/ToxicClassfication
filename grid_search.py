@@ -51,7 +51,10 @@ if __name__ == '__main__':
     # for label in labels:
     #     record = '{}_train_recoding.txt'.format(label)
     file = 'train_recoding.txt'
-    results = pool.starmap(train_and_predicate, product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs))
+    results = []
+    # results = pool.starmap(train_and_predicate, product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs))
+    for args in product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs):
+        results.append(*args)
 
     result = reduce(merge_result, results, [])
 

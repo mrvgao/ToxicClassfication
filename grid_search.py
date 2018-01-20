@@ -31,7 +31,7 @@ def train_and_predicate(label, model, dim, lr, windows, epoch):
 
     print('WHEN LABEL = {} DIM = {}, LR = {}, windows = {}, epoch = {}, model = {}'.format(label, dim, lr, windows, epoch, model))
     result = classifier.test(dev_file)
-    evaluation(dev_file)
+    evaluation(classifier, dev_file)
     print(" PRECISION: {}, RECALL: {}".format(result.precision, result.recall))
 
     del classifier

@@ -19,6 +19,6 @@ def evaluation(clf, dev_file):
     def_text = [' '.join(line.split()[1:]) for line in open(dev_file, encoding='utf-8')]
     labels_hat = clf.predict(def_text)
 
-    p, r = precision(labels, labels_hat, '__label__1')
+    p, r = precision(labels, labels_hat), recall(labels, labels_hat, '__label__1')
 
     return p, r

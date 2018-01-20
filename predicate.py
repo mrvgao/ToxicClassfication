@@ -30,7 +30,9 @@ with open('test_result.csv') as f:
     columns = "id, toxic, severe_toxic, obscene, threat, insult, identity_hate"
     columns = columns.split(', ')
     writer.writerow(columns)
+    index = 0
     for row in test_data.iterrows():
+        print('{}/{}'.format(index, len(test_data))); index += 1
         _id, text = row[1]['id'], row[1]['comment_text']
 
         new_row = [_id]

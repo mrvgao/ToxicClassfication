@@ -25,6 +25,13 @@ for line in lines:
 
 test_data = pd.read_csv('data/test.csv')
 
+
+def get_label_prob(result):
+    labels = '__label__0', '__label__1'
+    for r in result:
+        if r[0] == labels[1]: return r[1]
+
+
 with open('test_result.csv', 'w') as f:
     writer = csv.writer(f)
     columns = "id, toxic, severe_toxic, obscene, threat, insult, identity_hate"
@@ -37,9 +44,10 @@ with open('test_result.csv', 'w') as f:
 
         new_row = [_id]
         for label in columns[1:]:
-            result = best_model_parameters[label].predict_proba([text], k=1)
+            result = best_model_parameters[label].predict_proba([text], k=2)
             prob = result[0]
-            new_row.append(prob)
+            p = get_label_prob(prob)
+            new_row.append(p)
 
         print(new_row)
         writer.writerow(new_row)

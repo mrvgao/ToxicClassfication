@@ -1,5 +1,4 @@
 from itertools import product
-import config
 import os
 from preprocessing_training_corpus import get_train_dev_corpus_file_name
 from preprocessing_training_corpus import labels
@@ -17,11 +16,6 @@ def predicate(label, model_path):
     p, r, f1 = evaluation(classifier, dev_file)
     print(" {}_PRECISION: {}, RECALL: {} F1: {}".format(label, p, r, f1))
     return '{}-{}-precision-{}-recall-{}-f1-{}\n'.format(label, model_path, p, r, f1)
-
-
-def get_classifier_path(model, dim, lr, windows, epoch):
-    clf_path = '{}/clf/{}-{}-{}-{}-{}_model'.format(config.root, model, dim, lr, windows, epoch)
-    return clf_path
 
 
 def train_and_predicate(label, model, dim, lr, windows, epoch):

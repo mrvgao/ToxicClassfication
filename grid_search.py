@@ -53,8 +53,9 @@ if __name__ == '__main__':
     file = 'train_recoding.txt'
     results = []
     # results = pool.starmap(train_and_predicate, product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs))
-    start = 0
-    step = 30
+    index = 0
+    start = 30 * index
+    step = 30 * (index + 1)
     for ii, args in enumerate(product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)):
         if ii < start: continue
         if ii >= step: break

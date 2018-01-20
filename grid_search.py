@@ -15,7 +15,7 @@ def predicate(label, model_path):
     train_file, dev_file = get_train_dev_corpus_file_name(label=label)
     classifier = fasttext.load_model(model_path)
     p, r, f1 = evaluation(classifier, dev_file)
-    print(" {}_PRECISION: {}, RECALL: {} F1: {}".format(label, p, r, f1)
+    print(" {}_PRECISION: {}, RECALL: {} F1: {}".format(label, p, r, f1))
     return '{}-{}-precision-{}-recall-{}-f1-{}\n'.format(label, model_path, p, r, f1)
 
 

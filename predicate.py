@@ -25,7 +25,7 @@ for line in lines:
 
 test_data = pd.read_csv('data/test.csv')
 
-with open('test_result.csv') as f:
+with open('test_result.csv', 'w') as f:
     writer = csv.writer(f)
     columns = "id, toxic, severe_toxic, obscene, threat, insult, identity_hate"
     columns = columns.split(', ')

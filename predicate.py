@@ -23,9 +23,6 @@ for line in lines:
     best_model_parameters[words[0]] = fasttext.load_model(clf_path + '.bin')
 
 
-test_data = pd.read_csv('data/test.csv')
-
-
 def get_label_prob(result):
     labels = '__label__0', '__label__1'
     for r in result:
@@ -38,6 +35,7 @@ with open('test_result.csv', 'w') as f:
     columns = columns.split(', ')
     writer.writerow(columns)
     index = 0
+    test_data = pd.read_csv('data/test.csv')
     for row in test_data.iterrows():
         print('{}/{}'.format(index, len(test_data))); index += 1
         _id, text = row[1]['id'], row[1]['comment_text']

@@ -36,7 +36,7 @@ def train_and_predicate(label, model, dim, lr, windows, epoch):
     print('WHEN LABEL = {} DIM = {}, LR = {}, windows = {}, epoch = {}, model = {}'.format(label, dim, lr, windows, epoch, model))
     # result = classifier.test(dev_file)
     fasttext.test(dev_file)
-    print(" PRECISION: {}, RECALL: {}".format(result.precision, result.recall))
+    # print(" PRECISION: {}, RECALL: {}".format(result.precision, result.recall))
 
     del fasttext
 

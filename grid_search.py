@@ -55,11 +55,11 @@ def merge_result(already_notes, file):
 
 if __name__ == '__main__':
     P = Parameters
-    cpu_num = 50
+    cpu_num = 60
 
     pool = Pool(processes=cpu_num)
 
-    file = 'train_recoding.txt'
+    file = 'path_train_recoding.txt'
     results = []
     # results = pool.starmap(train_and_predicate, product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs))
     # index = 0
@@ -76,10 +76,13 @@ if __name__ == '__main__':
 
     pathes = [p.strip() for p in open('right_pathes.txt')]
 
-    for l, p in product(labels, pathes):
-        results.append(predicate(l, p))
+    results = pool.starmap(predicate, product(labels, pathes))
+    # for l, p in product(labels, pathes):
+    #     results.append(predicate(l, p))
 
     result = reduce(merge_result, results, [])
 
     with open(file, 'a') as f:
-        f.writelines(result)
+        for r in result:
+            f.write(r + '\n')
+        # f.writelines(result)

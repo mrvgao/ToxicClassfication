@@ -8,11 +8,10 @@ from paramters import Parameters
 from get_w2v_embedding import get_embedding_name
 from multiprocessing import Pool
 from functools import reduce
-from importlib import reload
+import fasttext
 
 
 def train_and_predicate(label, model, dim, lr, windows, epoch):
-    import fasttext
     w2v_model_name = get_embedding_name(model, dim, lr, windows, epoch)
     w2v_model_path = w2v_model_name + '.vec'
 
@@ -60,7 +59,10 @@ if __name__ == '__main__':
     results = []
     # results = pool.starmap(train_and_predicate, product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs))
     for args in product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs):
-        results.append(train_and_predicate(*args))
+        try:
+            results.append(train_and_predicate(*args))
+        except MemoryError:
+            continue
 
     result = reduce(merge_result, results, [])
 

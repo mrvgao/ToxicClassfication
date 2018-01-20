@@ -68,4 +68,4 @@ if __name__ == '__main__':
     result = reduce(merge_result, results, [])
 
     with open(file, 'a') as f:
-        f.writeline
+        f.writelines(result)

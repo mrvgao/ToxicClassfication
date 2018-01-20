@@ -31,8 +31,8 @@ def train_and_predicate(label, model, dim, lr, windows, epoch):
 
     print('WHEN LABEL = {} DIM = {}, LR = {}, windows = {}, epoch = {}, model = {}'.format(label, dim, lr, windows, epoch, model))
     result = classifier.test(dev_file)
-    p, r = evaluation(classifier, dev_file)
-    print('p, r by self is : P: {} R: {}'.format(p, r))
+    p, r, f1 = evaluation(classifier, dev_file)
+    print('p, r, f1 by self is : P: {} R: {} f1: {}'.format(p, r, f1))
     print(" PRECISION: {}, RECALL: {}".format(result.precision, result.recall))
 
     del classifier
@@ -53,7 +53,11 @@ if __name__ == '__main__':
     file = 'train_recoding.txt'
     results = []
     # results = pool.starmap(train_and_predicate, product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs))
-    for args in product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs):
+    start = 0
+    step = 30
+    for ii, args in enumerate(product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)):
+        if ii < start: continue
+        if ii >= step: break
         results.append(train_and_predicate(*args))
 
     result = reduce(merge_result, results, [])

@@ -21,4 +21,6 @@ def evaluation(clf, dev_file):
 
     p, r = precision(labels, labels_hat), recall(labels, labels_hat, '__label__1')
 
-    return p, r
+    f1 = 2 * (p * r) / (p + r)
+
+    return p, r, f1

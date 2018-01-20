@@ -20,6 +20,7 @@ for line in lines:
     words = line.split()
     method, dim, lr, ws, epoch = words[1], int(words[2]), float(words[3]), int(words[4]), int(words[5])
     clf_path = get_classifier_path(model=method, dim=dim, lr=lr, windows=ws, epoch=epoch)
+    print(clf_path)
     best_model_parameters[words[0]] = fasttext.load_model(clf_path)
 
 
@@ -43,6 +44,3 @@ with open('test_result.csv') as f:
 
         print(new_row)
         writer.writerow(new_row)
-
-
-

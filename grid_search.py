@@ -81,5 +81,5 @@ if __name__ == '__main__':
 
     with open(file, 'a') as f:
         for r in result:
-            f.write(r + '\n')
+            f.write(r)
         # f.writelines(result)

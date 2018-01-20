@@ -53,7 +53,7 @@ def write_one_train_corpus(label):
     labels = original_content[label].tolist()
 
     def write_to_file(file, indices):
-        with open(file, 'w') as f:
+        with open(file, 'w', encoding='utf-8') as f:
             for ii in indices:
                 sentence = format_string(sentences[ii])
                 f.write('__label__{} {}\n'.format(labels[ii], sentence))

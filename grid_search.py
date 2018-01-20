@@ -1,5 +1,4 @@
-# import fasttext
-from pyfasttext import FastText
+# from pyfasttext import FastText
 from itertools import product
 import config
 import os
@@ -10,10 +9,11 @@ from get_w2v_embedding import get_embedding_name
 from multiprocessing import Pool
 from functools import reduce
 from importlib import reload
+import fasttext
 
 
 def train_and_predicate(label, model, dim, lr, windows, epoch):
-    # reload(fasttext)
+    reload(fasttext)
     w2v_model_name = get_embedding_name(model, dim, lr, windows, epoch)
     w2v_model_path = w2v_model_name + '.vec'
 
@@ -21,7 +21,7 @@ def train_and_predicate(label, model, dim, lr, windows, epoch):
 
     train_file, dev_file = get_train_dev_corpus_file_name(label=label)
 
-    fasttext = FastText()
+    # fasttext = FastText()
 
     if not os.path.exists(clf_path + '.bin'):
         fasttext.supervised(
@@ -32,11 +32,11 @@ def train_and_predicate(label, model, dim, lr, windows, epoch):
             pretrained_vectors=w2v_model_path,
         )
     else:
-        # classifier = fasttext.load_model(clf_path + '.bin')
+        classifier = fasttext.load_model(clf_path + '.bin')
         fasttext.load_model(clf_path + '.bin')
 
     print('WHEN LABEL = {} DIM = {}, LR = {}, windows = {}, epoch = {}, model = {}'.format(label, dim, lr, windows, epoch, model))
-    result = fasttext.test(dev_file)
+    result = classifier.test(dev_file)
     print(" PRECISION: {}, RECALL: {}".format(result.precision, result.recall))
 
     del fasttext

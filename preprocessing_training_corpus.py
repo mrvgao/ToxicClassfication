@@ -27,23 +27,27 @@ def write_one_train_corpus(label):
     black_indices = np.nonzero(np.array(labeled_data) == 1)[0].tolist()
     white_indices = np.nonzero(np.array(labeled_data) == 0)[0].tolist()
 
-    expanding_ratio = (len(white_indices) - len(black_indices)) // len(black_indices)
-    black_indices = black_indices * (expanding_ratio + 1)
-    print('expanding ratio is {}'.format(expanding_ratio))
+    major_length = len(white_indices)
 
+    expanding_ratio = len(white_indices) // len(black_indices) + 1
+    black_indices = black_indices * expanding_ratio
+    print('expanding ratio is {}'.format(expanding_ratio))
+    #
     length = min(len(white_indices), len(black_indices))
 
     white_indices = white_indices[:length]
     black_indices = black_indices[:length]
-
+    #
     print('white indices is {}'.format(len(white_indices)))
     print('black indices is {}'.format(len(black_indices)))
 
     indices = black_indices + white_indices
 
+    assert len(black_indices) == len(white_indices) == major_length
+
     [random.shuffle(indices) for _ in range(10)]
 
-    train_ratio = 0.8
+    train_ratio = 0.85
     train_length = int(len(indices) * train_ratio)
     train_indices = indices[: train_length]
     dev_indices = indices[train_length:]
@@ -51,6 +55,8 @@ def write_one_train_corpus(label):
     train_file, dev_file = get_train_dev_corpus_file_name(label)
     sentences = original_content['comment_text'].tolist()
     labels = original_content[label].tolist()
+
+    assert len(sentences) == len(labels)
 
     def write_to_file(file, indices):
         with open(file, 'w', encoding='utf-8') as f:

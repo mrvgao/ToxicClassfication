@@ -48,41 +48,6 @@ def train_and_predicate(label, model, dim, lr, windows, epoch):
     del classifier
 
 
-def merge_result(already_notes, file):
-    return already_notes + [file]
-
-
 if __name__ == '__main__':
-    P = Parameters
-    cpu_num = 60
+    pass
 
-    pool = Pool(processes=cpu_num)
-
-    file = 'path_train_recoding.txt'
-    results = []
-    # results = pool.starmap(train_and_predicate, product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs))
-    # index = 0
-    # start = 30 * index
-    # step = 30 * (index + 1)
-    # for ii, args in enumerate(product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)):
-    #     if ii < start: continue
-    #     if ii >= step: break
-    #     try:
-    #         results.append(train_and_predicate(*args))
-    #     except MemoryError as e:
-    #         print(e)
-    #         continue
-
-    # pathes = [p.strip() for p in open('right_pathes.txt')]
-    pathes = [config.clf_root + m for m in os.listdir(config.clf_root)]
-
-    results = pool.starmap(predicate, product(labels, pathes))
-    # for l, p in product(labels, pathes):
-    #     results.append(predicate(l, p))
-
-    result = reduce(merge_result, results, [])
-
-    with open(file, 'w') as f:
-        for r in result:
-            f.write(r)
-        # f.writelines(result)

@@ -28,7 +28,7 @@ def train(label, model, dim, lr, windows, epoch):
 
 
 def get_length(*iterators):
-    return reduce(lambda x, y: x + y, map(len, iterators), 1)
+    return reduce(lambda x, y: x * y, map(len, iterators), 1)
 
 
 if __name__ == '__main__':

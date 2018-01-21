@@ -9,6 +9,7 @@ from functools import reduce
 import fasttext
 from evaluation import evaluation
 from train_models import get_classifier_path
+import config
 
 
 def predicate(label, model_path):
@@ -72,7 +73,8 @@ if __name__ == '__main__':
     #         print(e)
     #         continue
 
-    pathes = [p.strip() for p in open('right_pathes.txt')]
+    # pathes = [p.strip() for p in open('right_pathes.txt')]
+    pathes = [config.clf_root + m for m in os.listdir(config.clf_root)]
 
     results = pool.starmap(predicate, product(labels, pathes))
     # for l, p in product(labels, pathes):
@@ -80,7 +82,7 @@ if __name__ == '__main__':
 
     result = reduce(merge_result, results, [])
 
-    with open(file, 'a') as f:
+    with open(file, 'w') as f:
         for r in result:
             f.write(r)
         # f.writelines(result)

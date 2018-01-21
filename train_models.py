@@ -10,7 +10,7 @@ from tqdm import tqdm
 
 
 def get_classifier_path(label, method, dim, lr, windows, epoch):
-    clf_path = '{}/clf/{}-{}-{}-{}-{}-{}_model'.format(config.root, label, method, dim, lr, windows, epoch)
+    clf_path = '{}{}-{}-{}-{}-{}-{}_model'.format(config.clf_root, label, method, dim, lr, windows, epoch)
     return clf_path
 
 

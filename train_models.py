@@ -5,6 +5,7 @@ from preprocessing_training_corpus import labels
 from paramters import Parameters
 from get_w2v_embedding import get_embedding_name
 import fasttext
+from functools import reduce
 
 
 def get_classifier_path(model, dim, lr, windows, epoch):
@@ -26,7 +27,13 @@ def train(label, model, dim, lr, windows, epoch):
     )
 
 
+def get_length(*iterators):
+    return reduce(lambda x, y: x + y, map(len, iterators), 1)
+
+
 if __name__ == '__main__':
     P = Parameters
+    length = get_length(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)
     for ii, args in enumerate(product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)):
+        print('batch {}/{}'.format(ii, length))
         train(*args)

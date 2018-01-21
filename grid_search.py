@@ -8,6 +8,7 @@ from multiprocessing import Pool
 from functools import reduce
 import fasttext
 from evaluation import evaluation
+from train_models import get_classifier_path
 
 
 def predicate(label, model_path):

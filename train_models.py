@@ -6,6 +6,7 @@ from paramters import Parameters
 from get_w2v_embedding import get_embedding_name
 import fasttext
 from functools import reduce
+from tqdm import tqdm
 
 
 def get_classifier_path(label, method, dim, lr, windows, epoch):
@@ -34,6 +35,6 @@ def get_length(*iterators):
 if __name__ == '__main__':
     P = Parameters
     length = get_length(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)
-    for ii, args in enumerate(product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)):
-        print('batch {}/{}'.format(ii, length))
+    for ii, args in tqdm(enumerate(product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)), total=length):
+        # print('batch {}/{}'.format(ii, length))
         train(*args)

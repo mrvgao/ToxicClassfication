@@ -4,16 +4,9 @@ import pandas as pd
 import csv
 
 
-parameters = """identity_hate	cbow	30	0.001	9	15
-insult	skip	100	0.001	3	5
-obscene	cbow	100	0.001	3	10
-severe_toxic	cbow	60	0.001	9	15
-threat	cbow	30	0.001	9	10
-toxic	skip	100	0.01	9	5"""
-
 parameters = """identity_hate	toxic	skip	100	0.001	3	5
-insult	toxic	cbow	60	0.001	9	15
-obscene	toxic	cbow	60	0.001	9	15
+insult	toxic	cbow	100	0.001	6	15
+obscene	toxic	skip	100	0.01	9	10
 severe_toxic	toxic	cbow	30	0.001	3	10
 threat	toxic	cbow	30	0.001	6	5
 toxic	toxic	cbow	60	0.001	9	15"""

@@ -12,11 +12,10 @@ def evaluation(clf, dev_file):
     labels, def_text = [], []
 
     for line in open(dev_file, encoding='utf-8'):
-        label, text = line.split()[0], line.split()[1:]
+        label, text = line.split()[0], ' '.join(line.split()[1:])
         labels.append(label)
         def_text.append(text)
 
-    def_text = [' '.join(line.split()[1:]) for line in open(dev_file, encoding='utf-8')]
     labels_hat = clf.predict(def_text)
 
     p, r = precision(labels, labels_hat), recall(labels, labels_hat, '__label__1')

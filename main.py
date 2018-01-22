@@ -1,11 +1,11 @@
 from preprocessing_training_corpus import write_one_train_corpus
 from preprocessing_training_corpus import labels
-from train_models import train
+from grid_search import predicate
 from paramters import Parameters
 from functools import reduce
 from tqdm import tqdm
 from itertools import product
-from grid_search import predicate
+from train_models import train
 from multiprocessing import Pool
 import config
 import os

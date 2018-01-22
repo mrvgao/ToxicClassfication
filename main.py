@@ -25,10 +25,10 @@ for l in labels:
 
 
 P = Parameters
-length = get_length(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)
-for ii, args in tqdm(enumerate(product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)), total=length):
-    # print('batch {}/{}'.format(ii, length))
-    train(*args)
+# length = get_length(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)
+# for ii, args in tqdm(enumerate(product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)), total=length):
+#     print('batch {}/{}'.format(ii, length))
+    # train(*args)
 
 cpu_num = 60
 

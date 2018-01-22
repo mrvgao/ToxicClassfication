@@ -49,10 +49,13 @@ def write_one_train_corpus(label):
     train_length = min(len(train_black_indices), len(train_white_indices))
     train_black_indices = train_black_indices[: train_length]
 
-    assert train_length == len(train_white_indices) == len(train_black_indices)
+    # assert train_length == len(train_white_indices) == len(train_black_indices)
+    print('ratio of training corpus is {}'.format(len(train_white_indices)/len(train_black_indices)))
 
     dev_length = min(len(dev_black_indices), len(dev_white_indices))
     dev_black_indices = dev_black_indices[: dev_length]
+
+    print('ratio of dev corpus is {}'.format(len(dev_white_indices)/len(dev_black_indices)))
 
     assert dev_length == len(dev_white_indices) == len(dev_black_indices)
 

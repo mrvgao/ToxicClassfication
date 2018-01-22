@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-test_result = pd.read_csv('/Users/Minchiuan/Downloads/test_result.csv')
+test_result = pd.read_csv('test_result.csv')
 
 eps = 1.95313e-08
 zero = 0.0

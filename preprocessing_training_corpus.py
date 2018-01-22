@@ -23,46 +23,60 @@ def get_train_dev_corpus_file_name(label):
 def write_one_train_corpus(label):
     original_content = pd.read_csv('data/train.csv')
 
+    train_ratio = 0.75
+
     labeled_data = original_content[label].tolist()
+
     black_indices = np.nonzero(np.array(labeled_data) == 1)[0].tolist()
     white_indices = np.nonzero(np.array(labeled_data) == 0)[0].tolist()
 
-    # major_length = len(white_indices)
-    #
-    # expanding_ratio = len(white_indices) // len(black_indices) + 1
-    # black_indices = black_indices * expanding_ratio
-    # print('expanding ratio is {}'.format(expanding_ratio))
+    [np.random.shuffle(black_indices) for _ in range(10)]
+    [np.random.shuffle(white_indices) for _ in range(10)]
 
-    # length = min(len(white_indices), len(black_indices))
-    #
-    # white_indices = white_indices[:length]
-    # black_indices = black_indices[:length]
+    train_black_indices_num = int(len(black_indices) * train_ratio)
+    train_white_indices_num = int(len(white_indices) * train_ratio)
 
-    # print('white indices is {}'.format(len(white_indices)))
-    # print('black indices is {}'.format(len(black_indices)))
+    expanding_ratio = len(white_indices) // len(black_indices) + 1
 
-    indices = black_indices + white_indices
+    train_black_indices = black_indices[: train_black_indices_num]
+    dev_black_indices = black_indices[train_black_indices_num: ]
+    train_black_indices = train_black_indices * expanding_ratio
+    dev_black_indices = dev_black_indices * expanding_ratio
 
-    # assert len(black_indices) == len(white_indices) == major_length
+    train_white_indices = white_indices[: train_white_indices_num]
+    dev_white_indices = white_indices[train_white_indices_num:]
 
-    [random.shuffle(indices) for _ in range(10)]
+    train_length = min(len(train_black_indices), len(train_white_indices))
+    train_black_indices = train_black_indices[: train_length]
 
-    train_ratio = 0.85
-    train_length = int(len(indices) * train_ratio)
-    train_indices = indices[: train_length]
-    dev_indices = indices[train_length:]
+    assert train_length == len(train_white_indices) == len(train_black_indices)
+
+    dev_length = min(len(dev_black_indices), len(dev_white_indices))
+    dev_black_indices = dev_black_indices[: dev_length]
+
+    assert dev_length == len(dev_white_indices) == len(dev_black_indices)
 
     train_file, dev_file = get_train_dev_corpus_file_name(label)
     sentences = original_content['comment_text'].tolist()
-    labels = original_content[label].tolist()
+    Y = original_content[label].tolist()
 
-    assert len(sentences) == len(labels)
+    train_indices = train_white_indices + train_black_indices
+    dev_indices = dev_white_indices + dev_black_indices
+
+    [random.shuffle(train_indices) for _ in range(10)]
+    [random.shuffle(dev_indices) for _ in range(10)]
+
+    for i in train_indices:
+        for j in dev_indices:
+            assert i != j
+
+    assert len(sentences) == len(Y)
 
     def write_to_file(file, indices):
         with open(file, 'w', encoding='utf-8') as f:
             for ii in indices:
                 sentence = format_string(sentences[ii])
-                f.write('__label__{} {}\n'.format(labels[ii], sentence))
+                f.write('__label__{} {}\n'.format(Y[ii], sentence))
 
     write_to_file(train_file, train_indices)
     write_to_file(dev_file, dev_indices)

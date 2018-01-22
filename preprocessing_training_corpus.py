@@ -66,9 +66,10 @@ def write_one_train_corpus(label):
     [random.shuffle(train_indices) for _ in range(10)]
     [random.shuffle(dev_indices) for _ in range(10)]
 
-    for i in train_indices:
-        for j in dev_indices:
-            assert i != j
+    train_indices_set = set(train_indices)
+    dev_indices_set = set(dev_indices)
+
+    assert train_indices_set.isdisjoint(dev_indices_set)
 
     assert len(sentences) == len(Y)
 

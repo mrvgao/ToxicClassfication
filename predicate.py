@@ -11,6 +11,13 @@ severe_toxic	cbow	60	0.001	9	15
 threat	cbow	30	0.001	9	10
 toxic	skip	100	0.01	9	5"""
 
+parameters = """identity_hate	toxic	skip	100	0.001	3	5
+insult	toxic	cbow	60	0.001	9	15
+obscene	toxic	cbow	60	0.001	9	15
+severe_toxic	toxic	cbow	30	0.001	3	10
+threat	toxic	cbow	30	0.001	6	5
+toxic	toxic	cbow	60	0.001	9	15"""
+
 best_model_parameters = {}
 
 lines = parameters.split('\n')
@@ -18,7 +25,7 @@ lines = parameters.split('\n')
 
 for line in lines:
     words = line.split()
-    label, method, dim, lr, ws, epoch = words[0], words[1], int(words[2]), float(words[3]), int(words[4]), int(words[5])
+    label, method, dim, lr, ws, epoch = words[1], words[2], int(words[3]), float(words[4]), int(words[5]), int(words[6])
     clf_path = get_classifier_path(label=label, method=method, dim=dim, lr=lr, windows=ws, epoch=epoch)
     best_model_parameters[words[0]] = fasttext.load_model(clf_path + '.bin')
 

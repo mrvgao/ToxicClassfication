@@ -19,12 +19,12 @@ def merge_result(already_notes, file):
     return already_notes + [file]
 
 
-for l in labels:
-    print('label {}'.format(l))
-    write_one_train_corpus(l)
-
-
-P = Parameters
+# for l in labels:
+#     print('label {}'.format(l))
+#     write_one_train_corpus(l)
+#
+#
+# P = Parameters
 # length = get_length(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)
 # for ii, args in tqdm(enumerate(product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)), total=length):
 #     print('batch {}/{}'.format(ii, length))

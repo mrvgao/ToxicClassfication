@@ -27,23 +27,23 @@ def write_one_train_corpus(label):
     black_indices = np.nonzero(np.array(labeled_data) == 1)[0].tolist()
     white_indices = np.nonzero(np.array(labeled_data) == 0)[0].tolist()
 
-    major_length = len(white_indices)
-
-    expanding_ratio = len(white_indices) // len(black_indices) + 1
-    black_indices = black_indices * expanding_ratio
-    print('expanding ratio is {}'.format(expanding_ratio))
+    # major_length = len(white_indices)
     #
-    length = min(len(white_indices), len(black_indices))
+    # expanding_ratio = len(white_indices) // len(black_indices) + 1
+    # black_indices = black_indices * expanding_ratio
+    # print('expanding ratio is {}'.format(expanding_ratio))
 
-    white_indices = white_indices[:length]
-    black_indices = black_indices[:length]
+    # length = min(len(white_indices), len(black_indices))
     #
-    print('white indices is {}'.format(len(white_indices)))
-    print('black indices is {}'.format(len(black_indices)))
+    # white_indices = white_indices[:length]
+    # black_indices = black_indices[:length]
+
+    # print('white indices is {}'.format(len(white_indices)))
+    # print('black indices is {}'.format(len(black_indices)))
 
     indices = black_indices + white_indices
 
-    assert len(black_indices) == len(white_indices) == major_length
+    # assert len(black_indices) == len(white_indices) == major_length
 
     [random.shuffle(indices) for _ in range(10)]
 

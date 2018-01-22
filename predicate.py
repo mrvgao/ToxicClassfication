@@ -4,12 +4,12 @@ import pandas as pd
 import csv
 
 
-parameters = """identity_hate	cbow	60	0.001	9	15
-insult	cbow	100	0.001	9	10
-obscene	skip	100	0.001	9	5
-severe_toxic	cbow	60	0.001	9	10
-threat	cbow	30	0.001	9	15
-toxic	skip	100	0.001	3	10"""
+parameters = """identity_hate	cbow	30	0.001	9	15
+insult	skip	100	0.001	3	5
+obscene	cbow	100	0.001	3	10
+severe_toxic	cbow	60	0.001	9	15
+threat	cbow	30	0.001	9	10
+toxic	skip	100	0.01	9	5"""
 
 best_model_parameters = {}
 

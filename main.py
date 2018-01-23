@@ -7,6 +7,7 @@ from tqdm import tqdm
 from itertools import product
 from train_models import train
 from multiprocessing import Pool
+from get_w2v_embedding import train_embedding
 import config
 import os
 
@@ -26,8 +27,13 @@ for ii, l in enumerate(labels):
     print('label {}'.format(l))
     write_one_train_corpus(l, first_write=first)
 
-
 P = Parameters
+
+for ii, arg in enumerate(product(P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)):
+    first = ii == 0
+    train_embedding(*arg, first=first)
+
+
 length = get_length(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)
 for ii, args in tqdm(enumerate(product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)), total=length):
     print('batch {}/{}'.format(ii, length))

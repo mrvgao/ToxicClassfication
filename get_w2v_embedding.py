@@ -3,6 +3,7 @@ import config
 from multiprocessing import Pool
 from paramters import Parameters
 from itertools import product
+from utilities import remove_folder
 
 
 def get_embedding_name(model, dim, lr, windows, epoch):
@@ -11,7 +12,9 @@ def get_embedding_name(model, dim, lr, windows, epoch):
     return w2v_model_name
 
 
-def train_embedding(model, dim, lr, windows, epoch):
+def train_embedding(model, dim, lr, windows, epoch, first=False):
+    if first: remove_folder('{}/w2v'.format(config.root))
+
     if model == 'skip':
         func = fasttext.skipgram
     elif model == 'cbow':

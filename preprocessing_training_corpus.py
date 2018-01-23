@@ -32,7 +32,7 @@ def write_one_train_corpus(label, first_write=False):
 
     original_content = pd.read_csv('data/train.csv')
 
-    train_ratio = 0.75
+    train_ratio = 0.85
 
     labeled_data = original_content[label].tolist()
 

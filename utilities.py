@@ -1,4 +1,5 @@
 import shutil
+import os
 
 
 def format_string(string):
@@ -8,3 +9,4 @@ def format_string(string):
 
 def remove_folder(folder):
     shutil.rmtree(folder)
+    os.mkdir(folder)

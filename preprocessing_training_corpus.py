@@ -9,11 +9,11 @@ import os
 
 labels = [
     'toxic',
-    'severe_toxic',
-    'obscene',
-    'threat',
-    'insult',
-    'identity_hate',
+    # 'severe_toxic',
+    # 'obscene',
+    # 'threat',
+    # 'insult',
+    # 'identity_hate',
 ]
 
 

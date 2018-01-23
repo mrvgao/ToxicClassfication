@@ -3,6 +3,8 @@ import random
 import config
 from utilities import format_string
 import numpy as np
+from utilities import remove_folder
+import os
 
 
 labels = [
@@ -15,12 +17,19 @@ labels = [
 ]
 
 
+def remove_corpus_files():
+    remove_folder('{}/text'.format(config.root))
+    assert len(os.listdir('{}/text'.format(config.root))) == 0
+
+
 def get_train_dev_corpus_file_name(label):
     return '{}/text/train-corpus-{}.txt'.format(config.root, label), \
            '{}/text/dev-corpus-{}.txt'.format(config.root, label)
 
 
-def write_one_train_corpus(label):
+def write_one_train_corpus(label, first_write=False):
+    if first_write: remove_corpus_files()
+
     original_content = pd.read_csv('data/train.csv')
 
     train_ratio = 0.75

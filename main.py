@@ -19,16 +19,20 @@ def merge_result(already_notes, file):
     return already_notes + [file]
 
 
-for l in labels:
+for ii, l in enumerate(labels):
+    if ii == 0: first = True
+    else: first = False
+
     print('label {}'.format(l))
-    write_one_train_corpus(l)
+    write_one_train_corpus(l, first_write=first)
 
 
 P = Parameters
 length = get_length(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)
 for ii, args in tqdm(enumerate(product(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)), total=length):
     print('batch {}/{}'.format(ii, length))
-    train(*args)
+    first = ii == 0
+    train(*args, first_train=first)
 
 cpu_num = 60
 

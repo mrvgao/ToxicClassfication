@@ -7,6 +7,8 @@ from get_w2v_embedding import get_embedding_name
 import fasttext
 from functools import reduce
 from tqdm import tqdm
+from utilities import remove_folder
+import os
 
 
 def get_classifier_path(label, method, dim, lr, windows, epoch):
@@ -14,7 +16,11 @@ def get_classifier_path(label, method, dim, lr, windows, epoch):
     return clf_path
 
 
-def train(label, model, dim, lr, windows, epoch):
+def train(label, model, dim, lr, windows, epoch, first_train=False):
+    if first_train:
+        remove_folder(config.clf_root)
+        assert len(os.listdir(config.clf_root)) == 0
+
     w2v_model_name = get_embedding_name(model, dim, lr, windows, epoch)
     w2v_model_path = w2v_model_name + '.vec'
     clf_path = get_classifier_path(label, model, dim, lr, windows, epoch)

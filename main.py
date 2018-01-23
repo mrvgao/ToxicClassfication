@@ -44,7 +44,7 @@ cpu_num = 60
 
 pool = Pool(processes=cpu_num)
 
-file = 'path_train_recoding.txt'
+file = 'cust_data/path_train_recoding.txt'
 pathes = [config.clf_root + m for m in os.listdir(config.clf_root)]
 
 results = pool.map(predicate, pathes)

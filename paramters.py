@@ -1,8 +1,8 @@
 class Parameters:
     models = ['cbow']
-    dimensons = [10, 15, 30]
+    dimensons = [150]
     learning_rates = [1e-3]
-    ws = [6, 9]
-    epochs = [5, 10]
+    ws = [9]
+    epochs = [15]
     threads = 50
 

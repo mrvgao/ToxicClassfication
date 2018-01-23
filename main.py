@@ -10,6 +10,7 @@ from multiprocessing import Pool
 from get_w2v_embedding import train_embedding
 import config
 import os
+from parse_recodings import parse_file
 
 
 def get_length(*iterators):
@@ -44,13 +45,16 @@ cpu_num = 60
 
 pool = Pool(processes=cpu_num)
 
-file = 'cust_data/path_train_recoding.txt'
+model_perfermance_recoding_file_name = 'cust_data/path_train_recoding.txt'
 pathes = [config.clf_root + m for m in os.listdir(config.clf_root)]
 
 results = pool.map(predicate, pathes)
 
 result = reduce(merge_result, results, [])
 
-with open(file, 'w') as f:
+with open(model_perfermance_recoding_file_name, 'w') as f:
     for r in result:
         f.write(r)
+
+
+parse_file(model_perfermance_recoding_file_name, 'cust/different_model_performance.csv')

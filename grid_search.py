@@ -17,9 +17,13 @@ def predicate(model_path):
     print('label is {}'.format(label))
     train_file, dev_file = get_train_dev_corpus_file_name(label=label)
     classifier = fasttext.load_model(model_path)
-    p, r, f1 = evaluation(classifier, dev_file)
-    print(" {}_PRECISION: {}, RECALL: {} F1: {}".format(label, p, r, f1))
-    return '{}-{}-precision-{}-recall-{}-f1-{}\n'.format(label, model_path, p, r, f1)
+
+    t_p, t_r, t_f1 = evaluation(classifier, train_file)
+    d_p, d_r, d_f1 = evaluation(classifier, dev_file)
+    print(" {}_@T-P:{}, @T-R:{} @T-f1: {};  @D-P:{}, @D-R:{} @D-f1: {} ".format(
+        label, t_p, t_r, t_f1, d_p, d_r, d_f1))
+    return '{}-{}-t_precision-{}-t_recall-{}-t_f1-{}-d_precision-{}-d_recall-{}-d_f1-{}\n'.format(
+        label, model_path, t_p, t_r, t_f1, d_p, d_r, d_f1)
 
 
 def train_and_predicate(label, model, dim, lr, windows, epoch):

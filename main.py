@@ -57,4 +57,4 @@ with open(model_perfermance_recoding_file_name, 'w') as f:
         f.write(r)
 
 
-parse_file(model_perfermance_recoding_file_name, 'cust/different_model_performance.csv')
+parse_file(model_perfermance_recoding_file_name, 'cust_data/different_model_performance.csv')

@@ -21,18 +21,20 @@ def merge_result(already_notes, file):
     return already_notes + [file]
 
 
-for ii, l in enumerate(labels):
-    if ii == 0: first = True
-    else: first = False
-
-    print('label {}'.format(l))
-    write_one_train_corpus(l, first_write=first)
+train_new_embedding = True
 
 P = Parameters
 
-# for ii, arg in enumerate(product(P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)):
-#     first = ii == 0
-#     train_embedding(*arg, first=first)
+if train_new_embedding:
+    for ii, l in enumerate(labels):
+        if ii == 0: first = True
+        else: first = False
+        print('label {}'.format(l))
+        write_one_train_corpus(l, first_write=first)
+
+    for ii, arg in enumerate(product(P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)):
+        first = ii == 0
+        train_embedding(*arg, first=first)
 
 
 length = get_length(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)

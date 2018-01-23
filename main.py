@@ -30,9 +30,9 @@ for ii, l in enumerate(labels):
 
 P = Parameters
 
-for ii, arg in enumerate(product(P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)):
-    first = ii == 0
-    train_embedding(*arg, first=first)
+# for ii, arg in enumerate(product(P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)):
+#     first = ii == 0
+#     train_embedding(*arg, first=first)
 
 
 length = get_length(labels, P.models, P.dimensons, P.learning_rates, P.ws, P.epochs)

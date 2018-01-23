@@ -8,7 +8,6 @@ def parse_file(src, tgt):
 
         for line in open(src):
             dash_split = line.split('-')
-            print(list(enumerate(dash_split)))
             label = dash_split[0]
             model = dash_split[1].split('/')[-1]
             method = dash_split[2]

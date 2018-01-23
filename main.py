@@ -37,7 +37,7 @@ pool = Pool(processes=cpu_num)
 file = 'path_train_recoding.txt'
 pathes = [config.clf_root + m for m in os.listdir(config.clf_root)]
 
-results = pool.starmap(predicate, product(labels, pathes))
+results = pool.map(predicate, pathes)
 
 result = reduce(merge_result, results, [])
 

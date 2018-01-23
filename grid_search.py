@@ -12,7 +12,9 @@ from train_models import get_classifier_path
 import config
 
 
-def predicate(label, model_path):
+def predicate(model_path):
+    label = model_path.split('-')[0].split('/')[-1]
+    print('label is {}'.format(label))
     train_file, dev_file = get_train_dev_corpus_file_name(label=label)
     classifier = fasttext.load_model(model_path)
     p, r, f1 = evaluation(classifier, dev_file)

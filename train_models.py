@@ -32,7 +32,6 @@ def train(label, model, dim, lr, windows, epoch, first_train=False):
             pretrained_vectors=w2v_model_path,
             thread=80,
             word_ngrams=2,
-            loss='hs',
     )
 
 

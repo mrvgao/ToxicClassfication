@@ -31,7 +31,7 @@ def train(label, model, dim, lr, windows, epoch, first_train=False):
             dim=dim,
             # pretrained_vectors=w2v_model_path,
             thread=80,
-            word_ngrams=5,
+            word_ngrams=2,
             bucket=2000000,
     )
 

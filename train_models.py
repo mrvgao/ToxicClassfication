@@ -30,6 +30,7 @@ def train(label, model, dim, lr, windows, epoch, first_train=False):
             clf_path,
             dim=dim,
             # pretrained_vectors=w2v_model_path,
+            loss='ns',
             thread=80,
             word_ngrams=2,
             bucket=2000000,

@@ -3,7 +3,10 @@ import pandas as pd
 from utilities import format_string
 import config
 
-files = ['data/train.csv', 'data/train_old.csv']
+files = ['data/train.csv',
+         'data/train_old.csv',
+         'data/test.csv',
+         'data/test_old.csv']
 
 contents = [pd.read_csv(f) for f in files]
 

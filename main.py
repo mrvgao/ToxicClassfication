@@ -21,7 +21,7 @@ def merge_result(already_notes, file):
     return already_notes + [file]
 
 
-train_new_embedding = not True
+train_new_embedding = True
 
 P = Parameters
 

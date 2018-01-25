@@ -29,7 +29,7 @@ def train(label, model, dim, lr, windows, epoch, first_train=False):
             train_file,
             clf_path,
             dim=dim,
-            # pretrained_vectors=w2v_model_path,
+            pretrained_vectors=w2v_model_path,
             loss='ns',
             thread=80,
             word_ngrams=windows,
